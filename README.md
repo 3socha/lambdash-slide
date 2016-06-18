@@ -1,19 +1,14 @@
-# AWS Lambda でシェル芸
+# AWS Lambda でシェル芸 - スライド
 
-## 2016/6/18
-
-## .so
-
->>>
-
-powered by
 * [reveal.js](https://github.com/hakimel/reveal.js/)
 
----
+## how to
 
-## `$ whoami`
+```bash
+$ npm install
+```
 
-![S.Noda](img/so.png)
-
-* S.Noda
+```bash
+$ grunt serve
+```
 
