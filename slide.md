@@ -43,8 +43,8 @@ Powered by
 * 実行にかかった時間 × 割り当てメモリ量で課金
 	* メモリ：128MB ~ 1,536MB から選択
 	* 時間：100 ミリ秒単位の切り上げ
-	* 128MB × 100ms -> $0.000000208
-* 1か月に 400,000 GB/秒まで無料
+	* 128MB × 100ms で $0.000000208
+* １ヶ月に 400,000 GB 秒まで無料
 
 >>>
 
@@ -52,13 +52,13 @@ Powered by
 
 * AWS 上で発生したイベントをチャットに通知
 * Amazon S3 にアップロードされた画像を変換
-	* ImageMagick が入ってる
+	* ImageMagick がデフォルトで入ってる
 * Amazon API Gateway と組み合わせて Web API
 * モバイルアプリのバックエンド
 
 ---
 
-## Lambda function の例
+## Lambda Function の例
 
 ![lambda hello world](img/lambda-hello-world.png)
 
@@ -250,7 +250,7 @@ $ lambdash curl -s http://checkip.amazonaws.com/
 
 ## シェル芸の定義 v1.1 に準拠
 
-* 標準は大事だよね
+標準は大事だよね
 
 >>>
 
@@ -267,7 +267,7 @@ total 4
 -rw-rw-r-- 1 slicer 497 688 Jun 17 19:18 index.js
 ```
 
-* ホームディレクトリには Lambda Function のソース
+カレントディレクトリには Lambda Function のソース
 
 ```sh
 $ lambdash df -h
@@ -276,27 +276,27 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/loop2      526M  440K  514M   1% /tmp
 ```
 
-* コンテナ上で動作し、Lambda Function から書き込めるのは `/tmp` のみ
-* 512MB 程度
+コンテナ上で動作し、Lambda Function から書き込めるのは 500MB 程度の `/tmp` のみ
+
 
 >>>
 
 ## XX のコマンドが実行できない
 
-* 権限的に実行できないものは諦める
+権限的に実行できないものは諦める
 
 ```sh
-$ lambdash jq -v
+$ lambdash jq --version
 /bin/sh: jq: command not found
 ```
 
-* 存在しないコマンドはソースと一緒にアップロード
+存在しないコマンドはソースと一緒にアップロードする
 
 >>>
 
-## `jq` を lambdash 使う
+## `jq` を lambdash で使う
 
-* [./jq](https://stedolan.github.io/jq/) から Linux 版をダウンロード
+[./jq](https://stedolan.github.io/jq/) から Linux 版をダウンロードして配置、実行権限を付与
 
 ```sh
 $ tree
@@ -310,8 +310,9 @@ $ tree
 $ zip -r lambdash-with-jq.zip .
 ```
 
-* zip で固めて AWS Lambda にアップロード
-* lambdash で使う Lambda Function を変更
+zip で固めて AWS Lambda にアップロード
+
+lambdash で使う Lambda Function を変更
 
 ```sh
 $ export LAMBDASH_FUNCTION=lambdash-with-jq
@@ -347,7 +348,7 @@ rpm-python27-4.11.2-2.73.amzn1.x86_64
 python27-pycurl-7.19.0-17.12.amzn1.x86_64
 ```
 
-* Python 3.4 利用可
+Python 3.4 利用可
 
 >>>
 
@@ -357,6 +358,8 @@ java-1.8.0-openjdk-headless-1.8.0.77-0.b03.9.amzn1.x86_64
 java-1.7.0-openjdk-1.7.0.99-2.6.5.0.66.amzn1.x86_64
 java-1.8.0-openjdk-1.8.0.77-0.b03.9.amzn1.x86_64
 ```
+
+JRE 1.7 利用可
 
 >>>
 
@@ -411,6 +414,8 @@ this system using "man perl" or "perldoc perl".  If you have access to the
 Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 ```
 
+Perl 5.16 利用可
+
 >>>
 
 ```sh
@@ -449,7 +454,7 @@ $ echo ':(){ :|:& };:' | sed -e 's/\:/l/g' | xargs lambdash
 
 注: [forkbomb](https://ja.wikipedia.org/wiki/Fork%E7%88%86%E5%BC%BE) です
 
-実行される場合は自己責任でお願いします
+実行する場合は自己責任で
 
 ---
 
@@ -459,3 +464,15 @@ $ echo ':(){ :|:& };:' | sed -e 's/\:/l/g' | xargs lambdash
     * しばらく動いていない Lambda Function 用コンテナは落とされる
     * コンテナの起動、ENI のプロビジョニングに少し時間がかかる
     * まぁサーバ起動するより早いよ
+
+>>>
+
+## まとめ
+
+### AWS Lambda の用途
+
+* 安全シェル芸
+* 並列分散シェル芸
+* 高コスパシェル芸
+* クラウドシェル芸
+* サーバレスシェル芸
